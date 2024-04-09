@@ -10,13 +10,15 @@ namespace GildedRoseTests
         private readonly GildedRose _gildedRose;
         private readonly Item _regularItem;
         private readonly Item _agedBrie;
-
+        private readonly Item _backstagePasses;
+        private readonly Item _sulfuras;
         public GildedRoseTest()
         {
             _regularItem = new Item { Name = "normal", SellIn = 15, Quality = 20 };
             _agedBrie = new Item { Name = "Aged Brie", SellIn = 15, Quality = 20 };
-
-            _gildedRose = new GildedRose(new List<Item> { _regularItem, _agedBrie});
+            _backstagePasses = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 };
+            _sulfuras = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
+            _gildedRose = new GildedRose(new List<Item> { _regularItem, _agedBrie, _backstagePasses, _sulfuras});
         }
         
         [Fact]
@@ -37,5 +39,40 @@ namespace GildedRoseTests
             Assert.Equal(14, _agedBrie.SellIn);
         }
         
+        [Fact]
+        public void UpdateQuality_BackstagePasses_QualityIncreasesSellInDecreases()
+        {
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(21, _backstagePasses.Quality);
+            Assert.Equal(14, _backstagePasses.SellIn);
+        }
+        
+        [Fact]
+        public void UpdateQuality_Sulfuras_QualityAndSellInUnchanged()
+        {
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(80, _sulfuras.Quality);
+            Assert.Equal(5, _sulfuras.SellIn);
+        }
+        
+        [Fact]
+        public void UpdateQuality_QualityIsNeverNegative()
+        {
+            _regularItem.Quality = 0;
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(0, _regularItem.Quality);
+        }
+        
+        [Fact]
+        public void UpdateQuality_QualityNeverMoreThan50()
+        {
+            _agedBrie.Quality = 50;
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(50, _agedBrie.Quality);
+        }
     }
 }
