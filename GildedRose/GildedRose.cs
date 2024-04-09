@@ -21,7 +21,7 @@ namespace GildedRoseKata
                 ItemNames.AgedBrie => new AgedBrieBehaviour(),
                 ItemNames.BackstagePasses => new BackstagePassBehaviour(),
                 ItemNames.Sulfuras => new SulfurasBehaviour(),
-                ItemNames.Conjured => new ConjuredBehaviour(),
+                var name when name.StartsWith(ItemNames.Conjured) => new ConjuredBehaviour(),
                 _ => new DefaultBehaviour()
             };
         }
