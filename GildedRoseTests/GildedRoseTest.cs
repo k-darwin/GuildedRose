@@ -75,5 +75,14 @@ namespace GildedRoseTests
             Assert.Equal(50, _agedBrie.Quality);
         }
         
+        [Fact]
+        public void UpdateQuality_BackstagePassesAfterConcert_QualityDropsToZero()
+        {
+            _backstagePasses.SellIn = 0;
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(0, _backstagePasses.Quality);
+        }
+        
     }
 }
