@@ -12,13 +12,17 @@ namespace GildedRoseTests
         private readonly Item _agedBrie;
         private readonly Item _backstagePasses;
         private readonly Item _sulfuras;
+        private readonly Item _conjuredItem;
+
         public GildedRoseTest()
         {
             _regularItem = new Item { Name = "normal", SellIn = 15, Quality = 20 };
             _agedBrie = new Item { Name = "Aged Brie", SellIn = 15, Quality = 20 };
             _backstagePasses = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 };
             _sulfuras = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 };
-            _gildedRose = new GildedRose(new List<Item> { _regularItem, _agedBrie, _backstagePasses, _sulfuras});
+            _conjuredItem = new Item { Name = "Conjured", SellIn = 15, Quality = 20 };
+
+            _gildedRose = new GildedRose(new List<Item> { _regularItem, _agedBrie, _backstagePasses, _sulfuras, _conjuredItem});
         }
         
         [Fact]
@@ -84,5 +88,12 @@ namespace GildedRoseTests
             Assert.Equal(0, _backstagePasses.Quality);
         }
         
+        [Fact]
+        public void UpdateQuality_ConjuredItem_QualityDecreasesTwiceAsFast()
+        {
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(18, _conjuredItem.Quality);
+        }
     }
 }

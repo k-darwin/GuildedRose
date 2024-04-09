@@ -21,6 +21,7 @@ namespace GildedRoseKata
                 "Aged Brie" => new AgedBrieBehaviour(),
                 "Backstage passes to a TAFKAL80ETC concert" => new BackstagePassBehaviour(),
                 "Sulfuras, Hand of Ragnaros" => new SulfurasBehaviour(),
+                "Conjured" => new ConjuredBehaviour(),
                 _ => new DefaultBehaviour()
             };
         }
