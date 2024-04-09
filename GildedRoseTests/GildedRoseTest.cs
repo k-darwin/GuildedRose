@@ -35,6 +35,15 @@ namespace GildedRoseTests
         }
         
         [Fact]
+        public void UpdateQuality_NormalItemAfterSellIn_QualityDecreasesTwiceAsFast()
+        {
+            _regularItem.SellIn = 0;
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(16, _regularItem.Quality);
+        }
+        
+        [Fact]
         public void UpdateQuality_AgedBrie_QualityIncreasesSellInDecreases()
         {
             _gildedRose.UpdateQuality();
@@ -94,6 +103,24 @@ namespace GildedRoseTests
             _gildedRose.UpdateQuality();
 
             Assert.Equal(18, _conjuredItem.Quality);
+        }
+        
+        [Fact]
+        public void UpdateQuality_ConjuredItemAfterSellIn_QualityDecreasesTwiceAsFast()
+        {
+            _conjuredItem.SellIn = 0;
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(16, _conjuredItem.Quality);
+        }
+        
+        [Fact]
+        public void UpdateQuality_ConjuredItemQualityIsNeverNegative()
+        {
+            _conjuredItem.Quality = -1;
+            _gildedRose.UpdateQuality();
+
+            Assert.Equal(0, _conjuredItem.Quality);
         }
     }
 }

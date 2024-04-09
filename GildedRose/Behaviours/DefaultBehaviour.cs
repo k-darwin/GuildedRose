@@ -13,7 +13,7 @@ public class DefaultBehaviour : IItemBehaviour
 
         if (item.SellIn < 0 && item.Quality > 0)
         {
-            item.Quality--;
+            item.Quality -= 2;
         }
     }
 }
