@@ -74,5 +74,6 @@ namespace GildedRoseTests
 
             Assert.Equal(50, _agedBrie.Quality);
         }
+        
     }
 }
