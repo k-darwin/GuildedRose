@@ -7,12 +7,37 @@ namespace GildedRoseTests
     public class GildedRoseTest
     {
         [Fact]
-        public void foo()
+        public void UpdateQuality_WithDefaultItems_DecreasesQuality()
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            GildedRose app = new GildedRose(Items);
+            var items = new List<Item> {new() {Name = "item", Quality = 5, SellIn = 5}};
+            var app = new GildedRose(items);
+
             app.UpdateQuality();
-            Assert.Equal("fixme", Items[0].Name);
+
+            Assert.Equal(3, items[0].Quality);
         }
+        
+        [Fact]
+        public void UpdateQuality_WithDefaultItems_DecreasesSellIn()
+        {
+            var items = new List<Item> {new() {Name = "item", Quality = 5, SellIn = 5}};
+            var app = new GildedRose(items);
+
+            app.UpdateQuality();
+
+            Assert.Equal(4, items[0].SellIn);
+        }
+        
+        [Fact]
+        public void UpdateQuality_WithDefaultItems_QualityNeverNegative()
+        {
+            var items = new List<Item> {new() {Name = "item", Quality = 0, SellIn = 5}};
+            var app = new GildedRose(items);
+
+            app.UpdateQuality();
+
+            Assert.Equal(0, items[0].Quality);
+        }
+        
     }
 }
