@@ -18,10 +18,10 @@ namespace GildedRoseKata
         {
             return item.Name switch
             {
-                "Aged Brie" => new AgedBrieBehaviour(),
-                "Backstage passes to a TAFKAL80ETC concert" => new BackstagePassBehaviour(),
-                "Sulfuras, Hand of Ragnaros" => new SulfurasBehaviour(),
-                "Conjured" => new ConjuredBehaviour(),
+                ItemNames.AgedBrie => new AgedBrieBehaviour(),
+                ItemNames.BackstagePasses => new BackstagePassBehaviour(),
+                ItemNames.Sulfuras => new SulfurasBehaviour(),
+                ItemNames.Conjured => new ConjuredBehaviour(),
                 _ => new DefaultBehaviour()
             };
         }
