@@ -4,39 +4,37 @@ using GildedRoseKata;
 
 namespace GildedRoseTests
 {
+    
     public class GildedRoseTest
     {
-        [Fact]
-        public void UpdateQuality_WithDefaultItems_DecreasesQuality()
+        private readonly GildedRose _gildedRose;
+        private readonly Item _regularItem;
+        private readonly Item _agedBrie;
+
+        public GildedRoseTest()
         {
-            var items = new List<Item> {new() {Name = "item", Quality = 5, SellIn = 5}};
-            var app = new GildedRose(items);
+            _regularItem = new Item { Name = "normal", SellIn = 15, Quality = 20 };
+            _agedBrie = new Item { Name = "Aged Brie", SellIn = 15, Quality = 20 };
 
-            app.UpdateQuality();
-
-            Assert.Equal(3, items[0].Quality);
+            _gildedRose = new GildedRose(new List<Item> { _regularItem, _agedBrie});
         }
         
         [Fact]
-        public void UpdateQuality_WithDefaultItems_DecreasesSellIn()
+        public void UpdateQuality_NormalItem_QualityAndSellInDecrease()
         {
-            var items = new List<Item> {new() {Name = "item", Quality = 5, SellIn = 5}};
-            var app = new GildedRose(items);
+            _gildedRose.UpdateQuality();
 
-            app.UpdateQuality();
-
-            Assert.Equal(4, items[0].SellIn);
+            Assert.Equal(18, _regularItem.Quality);
+            Assert.Equal(14, _regularItem.SellIn);
         }
         
         [Fact]
-        public void UpdateQuality_WithDefaultItems_QualityNeverNegative()
+        public void UpdateQuality_AgedBrie_QualityIncreasesSellInDecreases()
         {
-            var items = new List<Item> {new() {Name = "item", Quality = 0, SellIn = 5}};
-            var app = new GildedRose(items);
+            _gildedRose.UpdateQuality();
 
-            app.UpdateQuality();
-
-            Assert.Equal(0, items[0].Quality);
+            Assert.Equal(21, _agedBrie.Quality);
+            Assert.Equal(14, _agedBrie.SellIn);
         }
         
     }
