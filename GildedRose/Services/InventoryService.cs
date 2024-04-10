@@ -9,8 +9,16 @@ public class InventoryService(IEnumerable<Item> items)
     {
         for (var day = 0; day < numberOfDays; day++)
         {
-            PrintDay(day);
-            UpdateQuality();
+            try
+            {
+                PrintDay(day);
+                UpdateQuality();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred:");
+                Console.WriteLine(e);
+            }
         }
     }
     
