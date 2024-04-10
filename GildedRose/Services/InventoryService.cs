@@ -9,19 +9,11 @@ public class InventoryService(IEnumerable<Item> items)
     {
         for (var day = 0; day < numberOfDays; day++)
         {
-            try
-            {
-                PrintDay(day);
-                UpdateQuality();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An error occurred:");
-                Console.WriteLine(e);
-            }
+            PrintDay(day);
+            UpdateQuality();
         }
     }
-    
+
     private void UpdateQuality()
     {
         var app = new GildedRose(items);
@@ -36,6 +28,7 @@ public class InventoryService(IEnumerable<Item> items)
         {
             Console.WriteLine($"{item.Name}, {item.SellIn}, {item.Quality}");
         }
+
         Console.WriteLine();
     }
 }

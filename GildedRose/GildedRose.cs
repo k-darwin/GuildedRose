@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GildedRoseKata.Behaviours;
 
 namespace GildedRoseKata
@@ -9,8 +10,16 @@ namespace GildedRoseKata
         {
             foreach (var item in items)
             {
-                var behavior = GetBehaviorForItem(item);
-                behavior.Update(item);
+                try
+                {
+                    var behavior = GetBehaviorForItem(item);
+                    behavior.Update(item);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"An error occurred for item {item.Name}, sellIn: {item.SellIn}, quality: {item.Quality}");
+                    Console.WriteLine(e);
+                }
             }
         }
 
